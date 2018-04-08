@@ -11,13 +11,14 @@
     	<div th:include="menuFragment" ></div>
 		<br/><Br/>
 		<table border="1" cellpadding="5">
-			<tr><th>Id</th><th>Nazwa</th><th>Adres</th><th>Akcje</th></tr>
+			<tr><th>Id</th><th>Rok rozpoczecia</th><th>Obecny rok</th><th>Profil</th><th>Akcja</th></tr>
 			<tr th:each="schoolClass: ${schoolClasses}">
 				<td><span th:text="${schoolClass.id}" /></td>
-				<td><span th:text="${schoolClass.name}" /></td>
-				<td><span th:text="${schoolClass.address}" /></td>
+				<td><span th:text="${schoolClass.startYear}" /></td>
+				<td><span th:text="${schoolClass.currentYear}" /></td>
+				<td><span th:text="${schoolClass.profile}" /></td>
 		        <td>
-		            <form action="DeleteSchoolClasses" method="POST">
+		            <form action="DeleteSchoolClass" method="POST">
 		            	<input type="hidden" name="schoolClassId" th:value="${schoolClass.id}" />
 		                <button type="submit">X</button>
 		            </form>
@@ -25,7 +26,7 @@
 			</tr>
 		
 		
-		</table><br/><a href='AddSchoolClasses'>dodaj klasę</a><br/><br/>
+		</table><br/><a href='AddSchoolClass'>dodaj klasę</a><br/><br/>
 		
     </div>
 
