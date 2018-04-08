@@ -1,10 +1,25 @@
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
+@Entity
+@Table(name="students")
 public class Student implements java.io.Serializable {
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private String surname;
+	
+	@Column
 	private String pesel;
 	
 	public long getId() {

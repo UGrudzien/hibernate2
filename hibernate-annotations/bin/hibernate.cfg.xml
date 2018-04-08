@@ -14,6 +14,7 @@
 	
 		<mapping class="School"/>
 		<mapping resource="SchoolClass.hbm.xml"/>
-		<mapping resource="Student.hbm.xml"/>
+		<mapping class="Student"/>
+		
 	</session-factory>
 </hibernate-configuration>
