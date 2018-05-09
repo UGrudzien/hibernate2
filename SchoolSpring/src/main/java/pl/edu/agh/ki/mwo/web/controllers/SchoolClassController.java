@@ -13,10 +13,10 @@ import pl.edu.agh.ki.mwo.model.SchoolClass;
 import pl.edu.agh.ki.mwo.persistence.DatabaseConnector;
 
 @Controller
-public class SchoolsClassController2 {
+public class SchoolClassController {
 
-	@RequestMapping(value="/SchoolClasses")
-    public String listSchoolsClasses(Model model, HttpSession session) {    	
+    @RequestMapping(value="/SchoolClasses")
+    public String listSchoolClass(Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
 
@@ -25,20 +25,21 @@ public class SchoolsClassController2 {
         return "schoolClassesList";    
     }
     
-    @RequestMapping(value="/AddSchoolClasses")
-    public String displayAddSchoolForm(Model model, HttpSession session) {    	
+    @RequestMapping(value="/AddSchoolClass")
+    public String displayAddSchoolClassForm(Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
-    	
+
+       	model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
+       	
         return "schoolClassForm";    
     }
 
     @RequestMapping(value="/CreateSchoolClass", method=RequestMethod.POST)
-    public String createSchoolClass(
-    		@RequestParam(value="schoolClassStartYear", required=false) String startYear,
-    		@RequestParam(value="schoolClassCurrentYear", required=false) String currentYear, 
+    public String createSchoolClass(@RequestParam(value="schoolClassStartYear", required=false) String startYear,
+    		@RequestParam(value="schoolClassCurrentYear", required=false) String currentYear,
     		@RequestParam(value="schoolClassProfile", required=false) String profile,
-      		@RequestParam(value="schoolClassSchool", required=false) String schoolId,
+    		@RequestParam(value="schoolClassSchool", required=false) String schoolId,
     		Model model, HttpSession session) {    	
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
@@ -48,10 +49,10 @@ public class SchoolsClassController2 {
     	schoolClass.setCurrentYear(Integer.valueOf(currentYear));
     	schoolClass.setProfile(profile);
     	
-    
-		DatabaseConnector.getInstance().addSchoolClass(schoolClass,schoolId);    	
-       	model.addAttribute("schoolClass", DatabaseConnector.getInstance().getSchoolClasses());
-    	model.addAttribute("message", "Nowa klasa zosta³a dodana");
+    	
+    	DatabaseConnector.getInstance().addSchoolClass(schoolClass, schoolId);    	
+       	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
+    	model.addAttribute("message", "Nowa klasa zostaÅ‚a dodana");
          	
     	return "schoolClassesList";
     }
@@ -62,9 +63,9 @@ public class SchoolsClassController2 {
     	if (session.getAttribute("userLogin") == null)
     		return "redirect:/Login";
     	
-    	DatabaseConnector.getInstance().deleteSchoolClasses(schoolClassId);    	
+    	DatabaseConnector.getInstance().deleteSchoolClass(schoolClassId);    	
        	model.addAttribute("schoolClasses", DatabaseConnector.getInstance().getSchoolClasses());
-    	model.addAttribute("message", "Klasa zosta³a usuniêta");
+    	model.addAttribute("message", "Klasa zostaÅ‚a usuniÄ™ta");
          	
     	return "schoolClassesList";
     }

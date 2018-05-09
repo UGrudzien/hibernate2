@@ -6,11 +6,11 @@
     <div layout:fragment="content">
     <div th:include="menuFragment" ></div>
     	<br/><br/>
-	   			<form action="CreateSchoolClass" method="POST">
+	   			<form action="CreateStudent" method="POST">
 					<table>
-						<tr><td>startYear:</td><td><input type="text" name="schoolClassStartYear" /></td></tr>
-						<tr><td>currentYear:</td><td><input type="text" name="schoolClassCurrentYear" /></td></tr>
-<tr><td>profile:</td><td><input type="text" name="schoolClassProfile" /></td></tr>
+						<tr><td>name:</td><td><input type="text" name="studentName" /></td></tr>
+						<tr><td>surname:</td><td><input type="text" name="studentSurname" /></td></tr>
+<tr><td>pesel:</td><td><input type="text" name="studentPesel" /></td></tr>
 					</table><br/><BR/>
 					<input type="submit" value="Utwórz"/>
 				</form>

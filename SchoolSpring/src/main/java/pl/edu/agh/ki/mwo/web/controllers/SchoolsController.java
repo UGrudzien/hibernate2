@@ -62,6 +62,30 @@ public class SchoolsController {
          	
     	return "schoolsList";
     }
+    @RequestMapping(value="/ChangeSchoolName", method=RequestMethod.POST)
+    public String changeSchoolName(@RequestParam(value="schoolId", required=false) String schoolId,
+    		Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+    	
+    	DatabaseConnector.getInstance().changeSchoolName(schoolId);    	
+       	model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
+    	model.addAttribute("message", "Nazwa szkoły została zmieniona");
+         	
+    	return "schoolsList";
+    }
+    @RequestMapping(value="/ChangeSchoolAdress", method=RequestMethod.POST)
+    public String changeSchoolAdress(@RequestParam(value="schoolId", required=false) String schoolId,
+    		Model model, HttpSession session) {    	
+    	if (session.getAttribute("userLogin") == null)
+    		return "redirect:/Login";
+    	
+    	DatabaseConnector.getInstance().changeSchoolName(schoolId);    	
+       	model.addAttribute("schools", DatabaseConnector.getInstance().getSchools());
+    	model.addAttribute("message", "Adres szkoły został zmieniony");
+         	
+    	return "schoolsList";
+    }
 
 
 }
